@@ -18,8 +18,6 @@ app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static("client/build"));
-
 app.use(cors());
 
 app.use(function (req, res, next) {
@@ -36,6 +34,8 @@ app.use(function (req, res, next) {
     next();
   }
 });
+
+app.use(express.static("client/build"));
 
 app.use("/posts",postRoutes);
 app.use("/user",userRoutes);
