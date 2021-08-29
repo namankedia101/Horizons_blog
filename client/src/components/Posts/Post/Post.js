@@ -1,11 +1,10 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, CardHeader, useTheme } from '@material-ui/core';
+import { Card, CardMedia, CardContent, Typography } from '@material-ui/core';
 import useStyles from "./styles";
 import moment from "moment";
 
 const Post = ({post}) => {
     const classes = useStyles();
-    const theme = useTheme();
 
     return (
     <Card className={classes.root} elevation={4}>

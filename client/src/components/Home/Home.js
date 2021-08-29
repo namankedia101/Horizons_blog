@@ -1,5 +1,5 @@
 import {Typography, Container, Paper } from '@material-ui/core';
-import React, {useState} from 'react';
+import React from 'react';
 import Posts from "../Posts/Posts";
 import useStyles from "./styles";
 import { useLocation } from 'react-router-dom';
@@ -11,7 +11,7 @@ function useQuery() {
   }
 
 const Home = () => {
-    const [currentId,setCurrentId] = useState(0);
+   // const [currentId,setCurrentId] = useState(0);
     const classes = useStyles();
     const query = useQuery();
     const page = query.get('page') || 1;

@@ -3,7 +3,7 @@ import {AppBar, Toolbar, Typography, Slide, useScrollTrigger, Tooltip, useMediaQ
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import decode from "jwt-decode";
 import MobileNav from "./MobileNav";
