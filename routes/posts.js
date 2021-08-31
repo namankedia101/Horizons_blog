@@ -1,10 +1,11 @@
 import express from "express";
-import {getPosts, createPost, updatePost, deletePost, commentPost, deleteComment} from "../controllers/posts.js";
+import {getPosts, createPost, updatePost, deletePost, commentPost, deleteComment, getPost} from "../controllers/posts.js";
 import auth from "../middleware/middleware.js";
 
 const router = express.Router();
 
 //GET requests
+router.get("/api/:id", getPost);
 router.get("/api/posts" , getPosts);
 
 //POST requests

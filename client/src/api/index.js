@@ -12,7 +12,7 @@ API.interceptors.request.use((req) => {
 
 export const createPost = (newPost) => API.post("/posts/api/newPost", newPost);
 export const fetchPosts = (page) => API.get(`/posts/api/posts?page=${page}`);
-
+export const fetchPost = (id)=>API.get(`/posts/api/${id}`);
 
 export const signUp = (formData)=>API.post("/user/api/signup", formData);
 export const signIn = (formData)=>API.post("/user/api/signin", formData);

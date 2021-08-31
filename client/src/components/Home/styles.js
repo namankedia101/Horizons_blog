@@ -54,7 +54,7 @@ export default makeStyles((theme)=>({
     },
     "@media(max-width:612px)":{
         mobileHero:{
-            zoom:"55%",
+            zoom:"41%",
         }
     }
 }))

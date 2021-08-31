@@ -1,12 +1,22 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { Card, CardMedia, CardContent, Typography, ButtonBase } from '@material-ui/core';
 import useStyles from "./styles";
 import moment from "moment";
+import { useHistory } from 'react-router-dom';
+import { getPost } from '../../../actions/posts';
 
 const Post = ({post}) => {
     const classes = useStyles();
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const openpost = ()=>{
+      history.push(`/posts/${post._id}`);
+    }
 
     return (
+      <ButtonBase onClick={openpost} component="span" >
     <Card className={classes.root} elevation={4}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
@@ -29,6 +39,7 @@ const Post = ({post}) => {
         title="Live from space album cover"
       />
     </Card>
+    </ButtonBase>
   );
 }
 
