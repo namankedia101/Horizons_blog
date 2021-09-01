@@ -16,7 +16,7 @@ const App =()=>{
             <Switch>
                 <Route path="/auth" exact component={()=>(!user ? <Auth /> : <Redirect to="/posts" />)}/>
                 <Route path="/" exact component={() => <Redirect to="/posts" />} />
-                <Route path="/posts/:id" exact component={PostDetails} />
+                {/* <Route path="/post/:id" exact component={PostDetails} /> */}
                 <Route path="/posts" exact component={Home} />
                 <Route path="/about" exact component={About}/>
                 <Route path="/newPost" exact component={Form} />

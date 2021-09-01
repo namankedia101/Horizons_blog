@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://warm-brushlands-22534.herokuapp.com",
   "homepage": "./",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
@@ -32,7 +33,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
