@@ -8,12 +8,12 @@ const Post = ({post}) => {
     const classes = useStyles();
     const history = useHistory();
 
-    // const openpost = ()=>{
-    //   history.push(`/post/${post._id}`);
-    // }
+    const openPost = ()=>{
+      history.push(`/post/${post._id}`);
+    }
 
     return (
-      <ButtonBase component="span" >
+      <ButtonBase component="span" onClick={openPost}>
     <Card className={classes.root} elevation={4}>
       <div className={classes.details}>
         <CardContent className={classes.content}>

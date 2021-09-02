@@ -35,14 +35,13 @@ app.use(function (req, res, next) {
   }
 });
 
-app.use(express.static("client/build"));
-
 app.use("/posts",postRoutes);
 app.use("/user",userRoutes);
 
 app.get("/api",(req,res)=>{
   res.send("Welcome Horizons Blog API");
 })
+app.use(express.static("client/build"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
