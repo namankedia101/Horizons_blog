@@ -9,6 +9,7 @@ const Post = ({post}) => {
     const history = useHistory();
 
     const openPost = ()=>{
+      console.log("1");
       history.push(`/post/${post._id}`);
     }
 

@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import useStyles from "./styles";
 import { createPost } from '../../actions/posts';
+import Navbar from '../Navbar/Navbar';
 
 const Form = () => {
     const classes= useStyles();
@@ -39,6 +40,7 @@ const Form = () => {
         
     return (
         <Container className={classes.formContainer}>
+        <Navbar color="#fff"/>
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={classes.form} onSubmit={handleSubmit}>
                 <Typography variant="h2">Create a New Blog</Typography>

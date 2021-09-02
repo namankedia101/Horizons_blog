@@ -89,6 +89,7 @@ export default makeStyles((theme)=>({
         },
         root:{
           margin: "auto",
+          zoom:"90%"
         },
         paper:{
           marginTop:"1rem",
