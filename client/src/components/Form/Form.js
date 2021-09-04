@@ -1,6 +1,6 @@
 import { Button, Container, Paper, TextField, Typography } from '@material-ui/core'
 import FileBase from "react-file-base64";
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import useStyles from "./styles";
@@ -8,11 +8,21 @@ import { createPost } from '../../actions/posts';
 import Navbar from '../Navbar/Navbar';
 
 const Form = () => {
+
+    const creators = ["kediaarts@gmail.com","rhythmbhatia28@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
+
     const classes= useStyles();
     const dispatch= useDispatch();
     const [postData,setPostData]=useState({
         title:"", message:"", selectedFile:""
       });
+
+      const user = JSON.parse(localStorage.getItem("profile"));
+      const [role,setRole] = useState(false);
+  
+      useEffect(()=>{
+          creators.map((creator)=> {if(creator===user?.result?.email)setRole(true)});
+      },[]);
     
     const history = useHistory();
 
@@ -38,8 +48,8 @@ const Form = () => {
     }
     }   
         
-    return (
-        <Container className={classes.formContainer}>
+    return (<>
+        {role ? <Container className={classes.formContainer}>
         <Navbar color="#fff"/>
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={classes.form} onSubmit={handleSubmit}>
@@ -54,7 +64,8 @@ const Form = () => {
                 <Button variant="outlined" color="secondary" className={classes.button} onClick={clear}>Cancel</Button>
             </form>
         </Paper>
-        </Container>
+        </Container> : <Typography variant="h1">Action not allowed!</Typography>}
+        </>
     )
 }
 
