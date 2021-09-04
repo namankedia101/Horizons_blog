@@ -32,5 +32,5 @@ export default makeStyles ((theme)=>({
         textDecoration:"none",
         marginRight:"1rem",
     },
-    menuIcon:{color:"#808080"}
+    menuIcon:{color: (props) => props.color,}
 }))

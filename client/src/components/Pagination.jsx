@@ -22,7 +22,7 @@ const Paginate = ({ page }) => {
       classes={{ ul: classes.ul}}
       count={numberOfPages}
       page={Number(page)||1}
-      color="secondary"
+      style={{color:"#808080"}}
       renderItem={(item) => (   
           <PaginationItem component={Link} to={`/posts?page=${item.page}` } {...item}  />   
       )}

@@ -10,8 +10,7 @@ import MobileNav from "./MobileNav";
 
 const Navbar = (props)=>{
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-   // const {currentPage} = useSelector((state) => (state.posts));
-   const matches = useMediaQuery('(max-width:768px)');
+    const matches = useMediaQuery('(max-width:768px)');
 
     const creators = ["kediaarts@gmail.com","rhythmbhatia28@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
 

@@ -1,26 +1,28 @@
-import { Container, Typography, LinearProgress, Paper } from '@material-ui/core';
-import React, {useEffect} from 'react';
-import Detail from "./Detail";
-import {getPost} from "../../actions/posts";
-import Navbar from '../Navbar/Navbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import useStyles from "./styles";
+import React, {useEffect,useState} from 'react';
+import { getPost } from '../../actions/posts';
+import {Typography, LinearProgress, Container} from "@material-ui/core";
+import {useSelector, useDispatch} from "react-redux";
+import {useParams} from "react-router-dom";
+import Details from './Details';
 
 const PostDetails = () => {
-
     const dispatch = useDispatch();
+    // const location = useLocation();
     const {id} = useParams();
-    const classes = useStyles();   
-    const {post,isLoading} = useSelector((state)=>(state.posts));
-
+    
+    const [isLoading, setIsLoading] = useState(true);
+    const { post} = useSelector((state)=>state.posts);
+    
     useEffect(()=>{
         dispatch(getPost(id));
-    },[id,dispatch]);
+        if(post)setIsLoading(false);
+    },[post,id]);
 
-    return (<div>
-    <Navbar color="#808080"/>
-        {isLoading ? (<LinearProgress />) : 
-   (<Detail post={post} />)}</div>)
-}        
+    return (
+        <>
+           {isLoading ? <LinearProgress/> : <Details loading={setIsLoading}/>}
+        </>
+    )
+};
+
 export default PostDetails
