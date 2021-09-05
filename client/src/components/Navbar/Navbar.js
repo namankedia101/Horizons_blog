@@ -12,7 +12,7 @@ const Navbar = (props)=>{
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const matches = useMediaQuery('(max-width:768px)');
 
-    const creators = ["kediaarts@gmail.com","rhythmbhatia28@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
+    const creators = ["kediaarts@gmail.com","rhythm7001@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
 
     const classes = useStyles(props);
     const trigger = useScrollTrigger();
@@ -70,7 +70,7 @@ const Navbar = (props)=>{
                 {user?.result ?
                     (<Link to="#" className={classes.items} onClick={logout}>
                     <Typography>
-                        Log Out
+                        Sign Out
                     </Typography>
                 </Link>):(<Link to="/auth"  className={classes.items}>
                     <Typography>

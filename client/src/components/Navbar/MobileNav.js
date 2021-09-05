@@ -11,7 +11,7 @@ import decode from "jwt-decode";
 const MobileNav = (props) => {
             const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
             const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-            const creators = ["kediaarts@gmail.com","rhythmbhatia28@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
+            const creators = ["kediaarts@gmail.com","rhythm7001@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
    
             const classes = useStyles(props);
             const dispatch = useDispatch();
@@ -81,7 +81,7 @@ const MobileNav = (props) => {
                       {user?.result ?
                     (<Link to="#" className={classes.dItems} onClick={logout}>
                     <Typography>
-                        Log Out
+                        Sign Out
                     </Typography>
                 </Link>):(<Link to="/auth" className={classes.dItems}>
                     <Typography>

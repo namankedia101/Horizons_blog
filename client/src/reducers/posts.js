@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 //import { START_LOADING, END_LOADING, FETCH_ALL, FETCH_POST, CREATE } from "../constants/constants";
 
-export default (state ={isLoading:true, posts:[]},action)=>{
+export default (state ={isLoading:false,posts:[]},action)=>{
     switch(action.type){
         case "START_LOADING":
             return {...state, isLoading:true};

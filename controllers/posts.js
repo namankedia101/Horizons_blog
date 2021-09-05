@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postContent.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const getPosts = async (req,res)=>{
     const {page} = req.query;
@@ -32,9 +33,14 @@ export const updatePost = async(req,res)=>{
 
 export const createPost = async(req,res)=>{
     const post = req.body;
+    
     const newPostContent = new PostMessage({...post,createdAt:new Date().toISOString()});
-
+    
     try {
+        const uploadResponse = await cloudinary.v2.uploader.upload(post.selectedFile,{
+            upload_preset:"horizons_blog"
+        });
+        console.log(uploadResponse);
         await newPostContent.save();
         res.status(201).json(newPostContent);
     } catch (error) {

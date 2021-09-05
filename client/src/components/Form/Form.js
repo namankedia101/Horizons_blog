@@ -1,7 +1,7 @@
 import { Button, Container, Paper, TextField, Typography } from '@material-ui/core'
 import FileBase from "react-file-base64";
 import React, {useState, useEffect} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import useStyles from "./styles";
 import { createPost } from '../../actions/posts';
@@ -9,8 +9,8 @@ import Navbar from '../Navbar/Navbar';
 
 const Form = () => {
 
-    const creators = ["kediaarts@gmail.com","rhythmbhatia28@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
-
+    const creators = ["kediaarts@gmail.com","rhythm7001@gmail.com","jayverma878@gmail.com","vsviveksonu@gmail.com"];
+    const {isLoading} = useSelector((state)=>state.posts);
     const classes= useStyles();
     const dispatch= useDispatch();
     const [postData,setPostData]=useState({
@@ -33,14 +33,19 @@ const Form = () => {
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
+        const byteSize = str => new Blob([str]).size;
+        const size = byteSize(postData.selectedFile);
+        
         if(postData.selectedFile===""){
             alert("Please provide an image for blog");
-        }else{
+        }else if(size > 200000){
+            alert("Maximum file size allowed is 200kb");
+            setPostData({...postData ,selectedFile: '' });
+        }else {
         let result= window.confirm("Are you sure to post the blog?");
         if(result){
             dispatch(createPost(postData));
             clear();
-            history.push("/");
         }else{
             return;
         }
