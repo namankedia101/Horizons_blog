@@ -2,6 +2,8 @@ import React, { useState} from 'react';
 import { useDispatch } from 'react-redux';
 import {useHistory} from "react-router-dom";
 import { signup, signin } from '../../actions/auth';
+import auth from '../../firebase';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import GoogleButton from "react-google-button";
 import {GoogleLogin} from "react-google-login";
 import {Container, Paper, Typography, Grid, Button, TextField, InputAdornment, IconButton} from "@material-ui/core";
@@ -15,8 +17,12 @@ const Auth = () => {
     const classes= useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const actionCodeSettings = {
+      url: 'https://warm-brushlands-22534.herokuapp.com/',
+    };
     const password = true;
+
+    const [verified, setVerified] = useState(false);
 
     const [form, setForm] = useState(initialState);
     const [isSignup,setSignUp] = useState(true);
@@ -26,9 +32,15 @@ const Auth = () => {
       e.preventDefault();
       
     if (isSignup) {
-    
-      dispatch(signup(form, history));
-      
+      createUserWithEmailAndPassword(auth,form.email , form.password)
+      .then((userCredential)=>{
+          // send verification mail.
+        const user = userCredential.user;
+        sendEmailVerification(user,actionCodeSettings);
+        auth.signOut().then(alert("Verify your account from link sent to your Gmail"));   
+      }).then(        
+        dispatch(signup(form, history)));
+      //.catch(alert("Something went wrong"));
     } else {
       dispatch(signin(form, history));
     }

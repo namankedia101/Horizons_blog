@@ -60,7 +60,7 @@ const Form = () => {
             <form autoComplete="off" noValidate className={classes.form} onSubmit={handleSubmit}>
                 <Typography variant="h2">Create a New Blog</Typography>
                 <TextField name="title" value={postData.title} label="Title" variant="outlined" onChange={(e)=>setPostData({...postData,title:e.target.value})} fullWidth className={classes.title} />
-                <TextField name="message" value={postData.message} variant="outlined" label="Blog Content" onChange={(e)=>setPostData({...postData,message:e.target.value})} multiline fullWidth className={classes.content}/>
+                <textarea name="message" value={postData.message}  placeholder="Type blog content here..." onChange={(e)=>setPostData({...postData,message:e.target.value})} className={classes.content}/>
                 <div className={classes.fileInput}>
                 <Typography className={classes.file}>Add images:</Typography>
                 <FileBase type="file"  onDone={({base64})=>setPostData({...postData, selectedFile:base64})}/>

@@ -15,7 +15,7 @@ export default makeStyles((theme)=>({
     },
     paper:{
         display: "flex",
-        marginTop:theme.spacing(20),
+        marginTop:theme.spacing(17),
         justifyContent: 'center',
         padding: "2rem",
         width: "fit-content",
@@ -33,6 +33,11 @@ export default makeStyles((theme)=>({
     },   
     content:{
         marginTop:theme.spacing(1.5),
+        width: "495px",
+        height: "100px",
+        borderColor:"darkgrey",
+        outline:"none"
+        
     },
     fileInput:{
         marginTop:theme.spacing(2),
@@ -49,7 +54,8 @@ export default makeStyles((theme)=>({
     },
     "@media(max-width:768px)":{
         paper:{
-            zoom:"70%"
+            zoom:"60%",
+            marginTop:"250px",
         }
     }
 }))
