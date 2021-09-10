@@ -34,7 +34,7 @@ const sendMail =async(email,code)=>{
 
     let mailOptions,link;
 
-   link = "http://localhost:5000/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
+   link = "https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
    console.log(link);
     mailOptions={
         from:'"Horizons" <no-reply@gmail.com>',
@@ -110,7 +110,7 @@ export const verifyUser =async(req,res)=>{
 export const verifying =async(req,res)=>{
 
    const {userId,secretCode}=req.params;
-   const redirect ="http://localhost:3000/";
+   const redirect ="https://warm-brushlands-22534.herokuapp.com/";
  try{  
    const id =await PendingUser.findOne({email:userId});
    const code = await PendingUser.findOne({code:secretCode});
