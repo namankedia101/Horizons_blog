@@ -4,21 +4,52 @@ import jwt  from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 import smtTransport from "nodemailer-smtp-transport";
+import {google} from "googleapis";
 
-let transport = nodemailer.createTransport(smtTransport({
-    service: "Gmail",
-    port: 465,
-    secure: true,
-    host: "smtp.gmail.com",
-    // port: 587,
-    // secure: false, 
-    auth: {
-        user: "kediaarts@gmail.com",
-        pass: process.env.EMAIL_PASS
-    },
-    tls: { rejectUnauthorized: false }
+const oAuth2Client =new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URI);
+oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
+google.options({ auth: oAuth2Client });
 
-}));
+const sendMail =async(email,code)=>{
+    try
+    {
+        const accessToken = new Promise((resolve, reject) => {
+            oAuth2Client.getAccessToken((err, token) => {
+              if (err) console.log(err); // Handling the errors
+              else resolve(token);
+            });
+          });
+    let transport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            type:"OAuth2",
+            user: "kediaarts@gmail.com",
+            pass: process.env.EMAIL_PASS,
+            clientId:process.env.CLIENT_ID,
+            clientSecret:process.env.CLIENT_SECRET,
+            refreshToken:process.env.REFRESH_TOKEN,
+            accessToken
+        }
+    });
+
+    let mailOptions,link;
+
+   link = "http://localhost:5000/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
+   console.log(link);
+    mailOptions={
+        from:'"Horizons" <no-reply@gmail.com>',
+        to : email,
+        subject: "Please verify your Email",
+        html : "<h1>Horizons</h1><br><h2>Hi,<br> Please click on the link to verify your email.</h2><br><a href="+link+">Click here to verify</a>",
+    }
+    const result =await transport.sendMail(mailOptions);
+    return result;
+
+} catch(error){
+    console.log(error);
+}
+    
+}
 
 export const signIn= async(req,res)=>{
     const {email, password} = req.body;
@@ -51,16 +82,8 @@ export const signUp= async(req,res)=>{
 
         await PendingUser.create({email:email,code:code.toString()});
 
-    let mailOptions,link;
-
-    link = "https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
-    mailOptions={
-        from:'"Horizons" <no-reply@gmail.com>',
-        to : email,
-        subject: "Please verify your Email",
-        html : "<h1>Horizons</h1><br><h2>Hi,<br> Please click on the link to verify your email.</h2><br><a href="+link+">Click here to verify</a>",
-    }
-    transport.sendMail(mailOptions);
+        sendMail(email,code).then((result) => console.log('Email sent...', result))
+        .catch((error) => console.log(error.message));
         
         const token = jwt.sign({email:result.email, id:result._id}, "test", {expiresIn:"1h"});
 
@@ -77,16 +100,8 @@ export const verifyUser =async(req,res)=>{
    console.log(email);
    try{
     await PendingUser.create({email:email,code:code.toString()});
-    let mailOptions,link;
-
-    link = "https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
-    mailOptions={
-        from:'"Horizons" <no-reply@gmail.com>',
-        to : email,
-        subject: "Please verify your Email",
-        html : "<h2>Horizons</h1><br><h4>Hi,<br> Please click on the link to verify your email.</h4><br><a href="+link+">Click here to verify</a>",
-    }
-    transport.sendMail(mailOptions);
+    sendMail(email,code).then((result) => console.log('Email sent...', result))
+    .catch((error) => console.log(error.message));
 } catch(error){
        res.json({message:"Something went wrong"}); 
    }

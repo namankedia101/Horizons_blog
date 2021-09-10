@@ -20,29 +20,14 @@ const Auth = () => {
     const [form, setForm] = useState(initialState);
     const [isSignup,setSignUp] = useState(true);
     const [isVisible,showPassword] = useState(false);
-    //const [verifyData,setVerifyData] = useState({userId:"",secretCode:""});
 
     const handleSubmit=(e)=>{
       e.preventDefault();
       
     if (isSignup) {
       if(form.password===form.confirmPassword){
-      // createUserWithEmailAndPassword(auth,form.email , form.password)
-      // .then((userCredential)=>{
-      //     // send verification mail.
-      //   const user = userCredential.user;
-      //   sendEmailVerification(user,actionCodeSettings);
-      //   //auth.signOut();
-      //   alert("Verify your account from link sent to your Gmail");   
-      // }).then(()=>{
-        //const code = Math.floor(Math.random()*90000) + 10000;
-        //setVerifyData({userId:form.email, secretCode:code.toString()});
-        //console.log(verifyData);
         dispatch(signup(form, history));  
-       // dispatch(verifyuser(form));
         alert("Email verification link is sent to your Gmail Id. Please verify link is valid for 10 minutes");
-        
-      //.catch(alert("Something went wrong"));
     }else{alert("Passwords don't match");setForm(initialState)}
     } else {
       dispatch(signin(form, history));
@@ -119,7 +104,7 @@ const Auth = () => {
             <Grid container spacing={2} className={classes.items}>
             <Typography>or</Typography>
             <GoogleLogin 
-              clientId="854415049304-eihcepvglrh6v140bd2u1t2oadplqkr9.apps.googleusercontent.com"
+              clientId="1039450379975-837pcdf3699hi18jitdbnadm3292l6sk.apps.googleusercontent.com"
               render={(renderProps)=>(<Button className={classes.button} onClick={renderProps.onClick} disabled={renderProps.disabled}><GoogleButton /></Button>)}
               onSuccess={googleSuccess}
               cookiePolicy="single_host_origin"
@@ -147,7 +132,7 @@ const Auth = () => {
             <Grid container spacing={2} className={classes.items}>
             <Typography>or</Typography>
             <GoogleLogin 
-              clientId="854415049304-eihcepvglrh6v140bd2u1t2oadplqkr9.apps.googleusercontent.com"
+              clientId="1039450379975-837pcdf3699hi18jitdbnadm3292l6sk.apps.googleusercontent.com"
               render={(renderProps)=>(<Button className={classes.button} onClick={renderProps.onClick} disabled={renderProps.disabled}><GoogleButton /></Button>)}
               onSuccess={googleSuccess}
               cookiePolicy="single_host_origin"

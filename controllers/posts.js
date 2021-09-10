@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import PostMessage from "../models/postContent.js";
-import cloudinary from "../utils/cloudinary.js";
 
 export const getPosts = async (req,res)=>{
     const {page} = req.query;
