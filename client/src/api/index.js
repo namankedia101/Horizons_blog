@@ -16,3 +16,4 @@ export const fetchPosts = (page) => API.get(`/posts/api/posts?page=${page}`);
 
 export const signUp = (formData)=>API.post("/user/api/signup", formData);
 export const signIn = (formData)=>API.post("/user/api/signin", formData);
+export const verifyUser =(verifyData)=> API.post("/user/api/auth/verification/verify-account", verifyData);

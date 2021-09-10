@@ -63,4 +63,6 @@ mongoose
   )
   .catch((error) => console.log(error.message));
 
-  mongoose.set('useFindAndModify', false);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);

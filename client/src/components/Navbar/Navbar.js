@@ -21,9 +21,9 @@ const Navbar = (props)=>{
     const dispatch = useDispatch();
 
     const logout =()=>{
+        setUser(null);
         dispatch({type:"LOGOUT"});
         history.push("/auth");
-        setUser(null);
     }
 
     useEffect(() => {
@@ -50,12 +50,12 @@ const Navbar = (props)=>{
                 </Toolbar>
                 <Toolbar>
                 {creators.map((creator)=>{
-                  if(creator===user?.result?.email)
+                  if(creator===user?.result?.email){
                    return  <Link to="/newPost" key={user?.result?.googleId} className={classes.items}>
                         <Tooltip title="Create New Blog">
                            <AddCircleIcon/>
                            </Tooltip>
-                        </Link>
+                        </Link>}else return null;
                  })}
                 <Link to="/about" className={classes.items}>
                     <Typography>

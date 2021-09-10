@@ -20,9 +20,9 @@ const MobileNav = (props) => {
             const trigger = useScrollTrigger();
 
             const logout =()=>{
+                setUser(null);
                 dispatch({type:"LOGOUT"});
                 history.push("/auth");
-                setUser(null);
             }
         
             useEffect(() => {
@@ -60,12 +60,12 @@ const MobileNav = (props) => {
                     <List >
                       <ListItem button>
                       {creators.map((creator)=>{
-                  if(creator===user?.result?.email)
+                  if(creator===user?.result?.email){
                    return  <Link to="/newPost" key={user?.result?.googleId} className={classes.dItems}>
                         <Tooltip title="Create New Blog">
                            <AddCircleIcon/>
                            </Tooltip>
-                        </Link>
+                        </Link>}else return null;
                  })}
                       </ListItem>
           

@@ -2,6 +2,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import heroImage from "../../images/milky-way-1030765_1920.jpg";
 
 export default makeStyles((theme)=>({
+    root2:{
+        position: "absolute",
+        top:"50%",
+        bottom:"50%",
+        display: "flex",
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+    },
+    verify:{
+        marginBottom:"1.5rem",
+        color: "#000",
+        justifyContent:"center",
+    },
     root:{
         maxWidth:"none",
         overflowX:"hidden",
