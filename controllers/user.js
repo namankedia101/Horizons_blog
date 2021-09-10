@@ -7,13 +7,17 @@ import smtTransport from "nodemailer-smtp-transport";
 
 let transport = nodemailer.createTransport(smtTransport({
     service: "Gmail",
+    port: 465,
+    secure: true,
     host: "smtp.gmail.com",
-    port: 587,
-    secure: false, 
+    // port: 587,
+    // secure: false, 
     auth: {
         user: "kediaarts@gmail.com",
         pass: process.env.EMAIL_PASS
-    }
+    },
+    tls: { rejectUnauthorized: false }
+
 }));
 
 export const signIn= async(req,res)=>{
