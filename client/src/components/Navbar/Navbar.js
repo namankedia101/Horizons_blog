@@ -23,7 +23,7 @@ const Navbar = (props)=>{
     const logout =()=>{
         setUser(null);
         dispatch({type:"LOGOUT"});
-        history.push("/auth");
+        window.location.href="/auth";
     }
 
     useEffect(() => {

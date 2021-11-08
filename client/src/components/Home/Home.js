@@ -22,7 +22,6 @@ const Home = () => {
 
     const handleClick =()=>{
         const email ={email: user?.result?.email} ;
-        console.log(email);
         dispatch(verifyuser(email));
         alert("Email verification link is sent to your Gmail Id. Please verify, link is valid for 10 minutes");
         setUser(null);
