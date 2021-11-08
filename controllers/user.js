@@ -3,22 +3,24 @@ import PendingUser from "../models/pendingUser.js";
 import jwt  from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
-import smtTransport from "nodemailer-smtp-transport";
+import dotenv from "dotenv";
 import {google} from "googleapis";
+
+dotenv.config();
 
 const oAuth2Client =new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URI);
 oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
 google.options({ auth: oAuth2Client });
 
 const sendMail =async(email,code)=>{
-    try
-    {
+    try{
         const accessToken = new Promise((resolve, reject) => {
             oAuth2Client.getAccessToken((err, token) => {
               if (err) console.log(err); // Handling the errors
               else resolve(token);
             });
           });
+
     let transport = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -35,7 +37,6 @@ const sendMail =async(email,code)=>{
     let mailOptions,link;
 
    link = "https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
-   console.log(link);
     mailOptions={
         from:'"Horizons" <no-reply@gmail.com>',
         to : email,
@@ -49,9 +50,8 @@ const sendMail =async(email,code)=>{
     return result;
 
 } catch(error){
-    console.log(error);
-}
-    
+    return error;
+}   
 }
 
 export const signIn= async(req,res)=>{
@@ -76,6 +76,7 @@ export const signUp= async(req,res)=>{
 
     try {
         const existingUser = await User.findOne({email});
+        console.log("here");
 
         if(existingUser) return res.status(404).json({message:"User already exists."});
         if(password!==confirmPassword) return res.status(404).json({message:"Passwords don't match."});
