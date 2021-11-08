@@ -42,7 +42,10 @@ const sendMail =async(email,code)=>{
         subject: "Please verify your Email",
         html : "<h1>Horizons</h1><br><h2>Hi,<br> Please click on the link to verify your email.</h2><br><a href="+link+">Click here to verify</a>",
     }
-    const result =await transport.sendMail(mailOptions);
+    const result =await transport.sendMail(mailOptions, (error, response) => {
+        error ? console.log(error) : console.log(response);
+        transport.close();
+   });
     return result;
 
 } catch(error){
