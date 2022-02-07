@@ -6,37 +6,44 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import {google} from "googleapis";
 
-dotenv.config();
+// dotenv.config();
 
-const oAuth2Client =new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URI);
-oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
-google.options({ auth: oAuth2Client });
+// const oAuth2Client =new google.auth.OAuth2(process.env.CLIENT_ID,process.env.CLIENT_SECRET,process.env.REDIRECT_URI);
+// oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN});
+// google.options({ auth: oAuth2Client });
 
 const sendMail =async(email,code)=>{
     try{
-        const accessToken = new Promise((resolve, reject) => {
-            oAuth2Client.getAccessToken((err, token) => {
-              if (err) console.log(err); // Handling the errors
-              else resolve(token);
-            });
-          });
+        // const accessToken = new Promise((resolve, reject) => {
+        //     oAuth2Client.getAccessToken((err, token) => {
+        //       if (err) console.log(err); // Handling the errors
+        //       else resolve(token);
+        //     });
+        //   });
 
     let transport = nodemailer.createTransport({
+        host:'smtp.google.com',
         service:"gmail",
+        port:587,
+        secure:true,
+        // requireTLS:true,
         auth: {
-            type:"OAuth2",
-            user: "kediaarts@gmail.com",
-           // pass: process.env.EMAIL_PASS,
-            clientId:process.env.CLIENT_ID,
-            clientSecret:process.env.CLIENT_SECRET,
-            refreshToken:process.env.REFRESH_TOKEN,
-            accessToken
-        }
+            //type:"OAuth2",
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASS,
+            // clientId:process.env.CLIENT_ID,
+            // clientSecret:process.env.CLIENT_SECRET,
+            // refreshToken:process.env.REFRESH_TOKEN,
+            // accessToken
+        },
+        tls:{
+            rejectUnauthorized:false
+          }
     });
 
     let mailOptions,link;
-
-   link = "https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
+//"https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString()
+   link = "http://localhost:5000/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
     mailOptions={
         from:'"Horizons" <no-reply@gmail.com>',
         to : email,
@@ -45,7 +52,7 @@ const sendMail =async(email,code)=>{
     }
     const result =await transport.sendMail(mailOptions, (error, response) => {
         error ? console.log(error) : console.log(response);
-        transport.close();
+        //transport.close();
    });
     return result;
 

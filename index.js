@@ -10,6 +10,8 @@ import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/user.js";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -19,9 +21,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.json({ extended: true, limit: "100mb" }));
 app.use(express.urlencoded({ extended: true, limit: "100mb" }));
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 app.use(cors());
 
