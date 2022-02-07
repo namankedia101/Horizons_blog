@@ -43,7 +43,7 @@ const sendMail =async(email,code)=>{
 
     let mailOptions,link;
 //"https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString()
-   link = "http://localhost:5000/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
+   link = "https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
     mailOptions={
         from:'"Horizons" <no-reply@gmail.com>',
         to : email,
