@@ -24,7 +24,7 @@ const sendMail =async(email,code)=>{
     let transport = nodemailer.createTransport({
         host:'smtp.google.com',
         service:"gmail",
-        port:587,
+        port:465,
         secure:true,
         // requireTLS:true,
         auth: {
@@ -36,9 +36,9 @@ const sendMail =async(email,code)=>{
             // refreshToken:process.env.REFRESH_TOKEN,
             // accessToken
         },
-        tls:{
-            rejectUnauthorized:false
-          }
+        // tls:{
+        //     rejectUnauthorized:false
+        //   }
     });
 
     let mailOptions,link;
