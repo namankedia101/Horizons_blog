@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: 'https://warm-brushlands-22534.herokuapp.com' });
+const API = axios.create({ baseURL: 'https://horizons.onrender.com' });
 //https://warm-brushlands-22534.herokuapp.com
 
 API.interceptors.request.use((req) => {
