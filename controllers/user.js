@@ -42,8 +42,8 @@ const sendMail =async(email,code)=>{
     });
 
     let mailOptions,link;
-//"https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString()
-   link = "https://warm-brushlands-22534.herokuapp.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
+//"https://horizons.onrender.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString()
+   link = "https://horizons.onrender.com/user/api/auth/verification/verify-account/"+email+"/"+code.toString() ;
     mailOptions={
         from:'"Horizons" <no-reply@gmail.com>',
         to : email,
@@ -121,7 +121,7 @@ export const verifyUser =async(req,res)=>{
 export const verifying =async(req,res)=>{
 
    const {userId,secretCode}=req.params;
-   const redirect ="https://warm-brushlands-22534.herokuapp.com/";
+   const redirect ="https://horizons.onrender.com/";
  try{  
    const id =await PendingUser.findOne({email:userId});
    const code = await PendingUser.findOne({code:secretCode});
